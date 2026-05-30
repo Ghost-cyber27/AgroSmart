@@ -1,14 +1,6 @@
 import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  FlatList,
-  Alert,
-  Button,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { RootNavigator } from "./src/navigation/RootNavigator";
@@ -35,7 +27,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#969393",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },

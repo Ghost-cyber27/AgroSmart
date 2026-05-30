@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -15,9 +16,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
-// import
+import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
+  const navigation = useNavigation();
+  const [seePass, setSeePass] = useState(true);
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -49,16 +52,29 @@ export default function Signup() {
               <TextInput
                 style={styles.textInput2}
                 placeholder="Your Password"
+                secureTextEntry={seePass}
               />
-              <Ionicons name="eye" size={24} />
+              {seePass ? (
+                <Ionicons
+                  name="eye-off"
+                  size={24}
+                  onPress={() => setSeePass(false)}
+                />
+              ) : (
+                <Ionicons
+                  name="eye"
+                  size={24}
+                  onPress={() => setSeePass(true)}
+                />
+              )}
             </View>
-            <TouchableOpacity style={styles.fBtn}>
-              <Text style={styles.fText}>Forgot Password ?</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.btn}>
               <Text style={styles.btnText}>Sign Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.rBtn}>
+            <TouchableOpacity
+              style={styles.rBtn}
+              onPress={() => navigation.navigate("Login")}
+            >
               <Text style={styles.text}>
                 Already have an account,
                 <Text style={{ fontWeight: "bold" }}> Login</Text>
@@ -75,6 +91,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: hp("5%"), // use react native responsive screen
+    backgroundColor: "white",
   },
   img: {
     width: wp("80%"),

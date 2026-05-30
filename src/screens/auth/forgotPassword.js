@@ -12,13 +12,17 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
-// import
+import { useNavigation } from "@react-navigation/native";
 
 export default function ForgotPassword() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.btnView}>
-        <TouchableOpacity style={styles.bBtn}>
+        <TouchableOpacity
+          style={styles.bBtn}
+          onPress={() => navigation.goBack()}
+        >
           <Ionicons name="arrow-back" size={24} color={"white"} />
         </TouchableOpacity>
       </View>
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingTop: hp("10%"), // use react native responsive screen
+    backgroundColor: "white",
   },
   btnView: {
     width: wp("80%"),

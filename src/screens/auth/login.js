@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -5,6 +6,7 @@ import {
   StyleSheet,
   TextInput,
   Image,
+  Modal,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -12,9 +14,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
+import { useNavigation } from "@react-navigation/native";
 // import
 
 export default function Login() {
+  const navigation = useNavigation();
+  const [seePass, setSeePass] = useState(true);
   return (
     <View style={styles.container}>
       <Image source={require("../../../assets/login.jpg")} style={styles.img} />
@@ -30,16 +35,31 @@ export default function Login() {
             style={styles.textInput2}
             placeholder="Your Password"
             keyboardType="default"
+            secureTextEntry={seePass}
           />
-          <Ionicons name="eye" size={24} />
+          {seePass ? (
+            <Ionicons
+              name="eye-off"
+              size={24}
+              onPress={() => setSeePass(false)}
+            />
+          ) : (
+            <Ionicons name="eye" size={24} onPress={() => setSeePass(true)} />
+          )}
         </View>
-        <TouchableOpacity style={styles.fBtn}>
+        <TouchableOpacity
+          style={styles.fBtn}
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
           <Text style={styles.fText}>Forgot Password ?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={() => setVisible(true)}>
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rBtn}>
+        <TouchableOpacity
+          style={styles.rBtn}
+          onPress={() => navigation.navigate("Signup")}
+        >
           <Text style={styles.text}>
             Don't have an account
             <Text style={{ fontWeight: "bold" }}>, Register</Text>
@@ -55,6 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingTop: hp("10%"), // use react native responsive screen
+    backgroundColor: "white",
   },
   img: {
     width: wp("80%"),
@@ -117,6 +138,7 @@ const styles = StyleSheet.create({
   fText: {
     fontSize: 16,
     fontFamily: "Regular",
+    color: "blue",
   },
   rBtn: {
     width: wp("80%"),

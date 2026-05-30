@@ -1,0 +1,154 @@
+{
+  "crops": [
+    {
+      "id": "CROP001",
+      "name": "Maize",
+      "category": "Cereal",
+      "soil_type": ["Loamy", "Sandy Loam"],
+      "climate": "Warm",
+      "season": "Wet",
+      "water_requirement": "Moderate",
+      "sunlight": "Full Sun",
+      "temperature_range_celsius": "18-30",
+      "growth_duration_days": 90,
+      "fertilizer_recommendation": "Apply NPK 15:15:15 two weeks after planting.",
+      "watering_advice": "Water 2-3 times weekly during dry periods.",
+      "pest_control": [
+        "Inspect regularly for fall armyworms.",
+        "Use neem-based pesticides if infestation occurs."
+      ],
+      "common_diseases": [
+        "Maize Streak Virus",
+        "Leaf Blight"
+      ],
+      "harvest_advice": "Harvest when husks are brown and dry.",
+      "storage_advice": "Store in a cool and dry place.",
+      "expected_yield_per_hectare_tons": 6.5
+    },
+    {
+      "id": "CROP002",
+      "name": "Rice",
+      "category": "Cereal",
+      "soil_type": ["Clay", "Loamy"],
+      "climate": "Humid",
+      "season": "Wet",
+      "water_requirement": "High",
+      "sunlight": "Full Sun",
+      "temperature_range_celsius": "20-35",
+      "growth_duration_days": 120,
+      "fertilizer_recommendation": "Apply urea fertilizer in split doses.",
+      "watering_advice": "Maintain shallow flooding during growth stage.",
+      "pest_control": [
+        "Monitor for rice stem borers.",
+        "Remove weeds frequently."
+      ],
+      "common_diseases": [
+        "Rice Blast",
+        "Bacterial Leaf Blight"
+      ],
+      "harvest_advice": "Harvest when 80% of grains turn golden.",
+      "storage_advice": "Dry grains properly before storage.",
+      "expected_yield_per_hectare_tons": 5.2
+    },
+    {
+      "id": "CROP003",
+      "name": "Cassava",
+      "category": "Root Crop",
+      "soil_type": ["Sandy Loam", "Loamy"],
+      "climate": "Tropical",
+      "season": "Wet",
+      "water_requirement": "Low",
+      "sunlight": "Full Sun",
+      "temperature_range_celsius": "25-35",
+      "growth_duration_days": 300,
+      "fertilizer_recommendation": "Apply potassium-rich fertilizer after 6 weeks.",
+      "watering_advice": "Water moderately during early growth.",
+      "pest_control": [
+        "Monitor for cassava mealybugs.",
+        "Remove infected leaves immediately."
+      ],
+      "common_diseases": [
+        "Cassava Mosaic Disease",
+        "Root Rot"
+      ],
+      "harvest_advice": "Harvest roots 8-12 months after planting.",
+      "storage_advice": "Process immediately after harvest to avoid spoilage.",
+      "expected_yield_per_hectare_tons": 12.0
+    },
+    {
+      "id": "CROP004",
+      "name": "Tomato",
+      "category": "Vegetable",
+      "soil_type": ["Loamy"],
+      "climate": "Warm",
+      "season": "Dry",
+      "water_requirement": "Moderate",
+      "sunlight": "Full Sun",
+      "temperature_range_celsius": "20-28",
+      "growth_duration_days": 85,
+      "fertilizer_recommendation": "Use compost and calcium-rich fertilizer.",
+      "watering_advice": "Water daily during fruiting stage.",
+      "pest_control": [
+        "Protect against aphids and whiteflies.",
+        "Use organic insecticides when needed."
+      ],
+      "common_diseases": [
+        "Early Blight",
+        "Tomato Wilt"
+      ],
+      "harvest_advice": "Harvest when fruits are fully red but firm.",
+      "storage_advice": "Keep in a cool and ventilated area.",
+      "expected_yield_per_hectare_tons": 18.5
+    },
+    {
+      "id": "CROP005",
+      "name": "Pepper",
+      "category": "Vegetable",
+      "soil_type": ["Loamy", "Sandy"],
+      "climate": "Warm",
+      "season": "Dry",
+      "water_requirement": "Moderate",
+      "sunlight": "Full Sun",
+      "temperature_range_celsius": "22-30",
+      "growth_duration_days": 75,
+      "fertilizer_recommendation": "Apply balanced fertilizer every 3 weeks.",
+      "watering_advice": "Keep soil moist but not waterlogged.",
+      "pest_control": [
+        "Inspect for thrips and mites.",
+        "Use mulch to reduce pests."
+      ],
+      "common_diseases": [
+        "Pepper Mosaic Virus",
+        "Anthracnose"
+      ],
+      "harvest_advice": "Harvest peppers when they reach full size.",
+      "storage_advice": "Store in dry baskets or refrigerated areas.",
+      "expected_yield_per_hectare_tons": 10.4
+    },
+    {
+      "id": "CROP006",
+      "name": "Yam",
+      "category": "Tuber",
+      "soil_type": ["Sandy Loam"],
+      "climate": "Tropical",
+      "season": "Wet",
+      "water_requirement": "Moderate",
+      "sunlight": "Partial Sun",
+      "temperature_range_celsius": "25-34",
+      "growth_duration_days": 240,
+      "fertilizer_recommendation": "Use organic manure before planting.",
+      "watering_advice": "Water regularly during vine development.",
+      "pest_control": [
+        "Protect tubers from nematodes.",
+        "Use healthy seed yams."
+      ],
+      "common_diseases": [
+        "Yam Anthracnose",
+        "Tuber Rot"
+      ],
+      "harvest_advice": "Harvest when leaves begin to dry naturally.",
+      "storage_advice": "Store in a dry and airy barn.",
+      "expected_yield_per_hectare_tons": 14.8
+    }
+  ]
+}

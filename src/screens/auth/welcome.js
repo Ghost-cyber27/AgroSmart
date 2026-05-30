@@ -8,16 +8,19 @@ import {
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from "react-native-responsive-screen"; //
 import { COLORS } from "../../utils/colors";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage"; //
+import { useNavigation } from "@react-navigation/native"; //
 
 export default function Welcome() {
+  const navigation = useNavigation();
   const nextScreen = async () => {
     try {
       //set AsyncStorage
       await AsyncStorage.setItem("install", "true");
       //navigate
+      navigation.navigate("Login");
     } catch (error) {
       console.error("Error: ", error);
     }
