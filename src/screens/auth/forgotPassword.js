@@ -49,7 +49,7 @@ export default function ForgotPassword() {
                 keyboardType="email-address"
                 onChangeText={handleSubmit("email")}
               />
-              {touched.email && errors.email && <Text>{errors.email}</Text>}
+              {touched.email && errors.email && <Text style={{ color: "red" }}>{errors.email}</Text>}
               <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Reset</Text>
               </TouchableOpacity>

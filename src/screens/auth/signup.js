@@ -68,14 +68,16 @@ export default function Signup() {
                     onChangeText={handleChange("fullname")}
                   />
                   {touched.fullname && errors.fullname && (
-                    <Text>{errors.fullname}</Text>
+                    <Text style={{ color: "red" }}>{errors.fullname}</Text>
                   )}
                   <TextInput
                     style={styles.textInput}
                     placeholder="email@example.com"
                     onChangeText={handleChange("email")}
                   />
-                  {touched.email && errors.email && <Text>{errors.email}</Text>}
+                  {touched.email && errors.email && (
+                    <Text style={{ color: "red" }}>{errors.email}</Text>
+                  )}
                   <View style={styles.inputView}>
                     <TextInput
                       style={styles.textInput2}
@@ -98,7 +100,7 @@ export default function Signup() {
                     )}
                   </View>
                   {touched.password && errors.password && (
-                    <Text>{errors.password}</Text>
+                    <Text style={{ color: "red" }}>{errors.password}</Text>
                   )}
                   <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
                     <Text style={styles.btnText}>Sign Up</Text>
