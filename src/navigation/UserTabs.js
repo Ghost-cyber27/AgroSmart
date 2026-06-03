@@ -9,9 +9,29 @@ const Tab = createBottomTabNavigator();
 export const UserTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Detection" component={Detection} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => <Ionicons name="home" size={24} />,
+        }}
+      />
+      <Tab.Screen
+        name="Detection"
+        component={Detection}
+        options={{
+          tabBarIcon: () => <Ionicons name="search" size={24} />,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => <Ionicons name="person" size={24} />,
+        }}
+      />
     </Tab.Navigator>
   );
 };

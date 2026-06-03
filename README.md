@@ -36,11 +36,7 @@ AgroSmart is a mobile application designed to support and empower farmers in Nig
 
 ## 📸 Screenshots
 
-_Add your app screenshots here_
-
-| Home Screen                     | Weather Screen                        | Profile Screen                        |
-| ------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Home](./screenshots/home.png) | ![Weather](./screenshots/weather.png) | ![Profile](./screenshots/profile.png) |
+check the screenshot folder in assets
 
 ---
 

@@ -17,6 +17,16 @@ import {
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
 import { useNavigation } from "@react-navigation/native";
+import { object, string } from "yup";
+import { Formik } from "formik";
+
+const SignupSchemas = object({
+  fullname: string().required("Full Name Required"),
+  email: string().email("Must be an Email").required("Email Required"),
+  password: string()
+    .min(8, "Must be at least * characters")
+    .required("Password Required"),
+});
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -41,51 +51,80 @@ export default function Signup() {
             source={require("../../../assets/signup.jpg")}
             style={styles.img}
           />
-          <View style={styles.content}>
-            <Text style={styles.h1}>Sign Up</Text>
-            <TextInput style={styles.textInput} placeholder="Full Name" />
-            <TextInput
-              style={styles.textInput}
-              placeholder="email@example.com"
-            />
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.textInput2}
-                placeholder="Your Password"
-                secureTextEntry={seePass}
-              />
-              {seePass ? (
-                <Ionicons
-                  name="eye-off"
-                  size={24}
-                  onPress={() => setSeePass(false)}
-                />
-              ) : (
-                <Ionicons
-                  name="eye"
-                  size={24}
-                  onPress={() => setSeePass(true)}
-                />
-              )}
-            </View>
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.btnText}>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rBtn}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Text style={styles.text}>
-                Already have an account,
-                <Text style={{ fontWeight: "bold" }}> Login</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Formik
+            initialValues={{ fullname: "", email: "", password: "" }}
+            validationSchema={SignupSchemas}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          >
+            {({ handleChange, handleSubmit, values, errors, touched }) => (
+              <>
+                <View style={styles.content}>
+                  <Text style={styles.h1}>Sign Up</Text>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Full Name"
+                    onChangeText={handleChange("fullname")}
+                  />
+                  {touched.fullname && errors.fullname && (
+                    <Text>{errors.fullname}</Text>
+                  )}
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="email@example.com"
+                    onChangeText={handleChange("email")}
+                  />
+                  {touched.email && errors.email && <Text>{errors.email}</Text>}
+                  <View style={styles.inputView}>
+                    <TextInput
+                      style={styles.textInput2}
+                      placeholder="Your Password"
+                      secureTextEntry={seePass}
+                      onChangeText={handleChange("password")}
+                    />
+                    {seePass ? (
+                      <Ionicons
+                        name="eye-off"
+                        size={24}
+                        onPress={() => setSeePass(false)}
+                      />
+                    ) : (
+                      <Ionicons
+                        name="eye"
+                        size={24}
+                        onPress={() => setSeePass(true)}
+                      />
+                    )}
+                  </View>
+                  {touched.password && errors.password && (
+                    <Text>{errors.password}</Text>
+                  )}
+                  <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+                    <Text style={styles.btnText}>Sign Up</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.rBtn}
+                    onPress={() => navigation.navigate("Login")}
+                  >
+                    <Text style={styles.text}>
+                      Already have an account,
+                      <Text style={{ fontWeight: "bold" }}> Login</Text>
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </Formik>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
+
+/**
+ *
+ */
 
 const styles = StyleSheet.create({
   container: {

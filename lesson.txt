@@ -1,0 +1,58 @@
+Formik manages:
+
+* form values
+* errors
+* touched fields
+* submission
+
+Yup defines rules in a clean way.
+
+## ✅ Form Validation
+
+Ensures user input is correct before submission.
+
+Examples:
+
+* Email must be valid format
+* Password must be at least 8 characters
+* Required fields cannot be empty
+
+## ✅ Authentication
+
+Verifying a user’s identity (login/signup).
+
+Examples:
+
+* Login form → checks email & password
+* Signup form → creates account
+
+## ✅ Form Submission
+
+Sending validated data to backend/API.
+
+validationSchema={loginSchema}
+                            onSubmit={(values) => {
+                                setIsLoading(true);
+                                console.log("Login Data:", values);
+                                login(values.email, values.password);
+                                setIsLoading(false);
+                            }}
+
+{({
+    handleChange, //update form values
+    handleSubmit, //Runs the Formik onSubmit function.
+    values, //Contains the current form data.
+    errors, //Contains validation errors.
+    touched, //Tracks whether the user has interacted with a field.
+}) => (
+
+
+User clicks Login
+      ↓
+Formik validates email/password
+      ↓
+If valid
+      ↓
+onSubmit() runs
+      ↓
+login(values.email, values.password)

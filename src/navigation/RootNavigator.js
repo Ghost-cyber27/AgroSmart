@@ -35,7 +35,7 @@ const App = () => {
 export const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <Auth />
+      <App />
     </NavigationContainer>
   );
 };

@@ -13,6 +13,12 @@ import {
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
 import { useNavigation } from "@react-navigation/native";
+import { object, string } from "yup";
+import { Formik } from "formik";
+
+const ForgotSchemas = object({
+  email: string().email("Must be an Email").required("Email Required"),
+});
 
 export default function ForgotPassword() {
   const navigation = useNavigation();
@@ -26,20 +32,37 @@ export default function ForgotPassword() {
           <Ionicons name="arrow-back" size={24} color={"white"} />
         </TouchableOpacity>
       </View>
-      <View style={styles.content}>
-        <Text style={styles.h1}>Forgot Password</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="email@example.com"
-          keyboardType="email-address"
-        />
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Reset</Text>
-        </TouchableOpacity>
-      </View>
+      <Formik
+        initialValues={{ email: "" }}
+        validationSchema={ForgotSchemas}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors, touched }) => (
+          <>
+            <View style={styles.content}>
+              <Text style={styles.h1}>Forgot Password</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="email@example.com"
+                keyboardType="email-address"
+                onChangeText={handleSubmit("email")}
+              />
+              {touched.email && errors.email && <Text>{errors.email}</Text>}
+              <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+                <Text style={styles.btnText}>Reset</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+      </Formik>
     </View>
   );
 }
+/**
+ *
+ */
 
 const styles = StyleSheet.create({
   container: {
