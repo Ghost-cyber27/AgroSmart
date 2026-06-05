@@ -1,6 +1,6 @@
 import * as Location from "expo-location";
 
-const fetchWeatherByLocation = async () => {
+export const fetchWeatherByLocation = async () => {
   try {
     // Request permission
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -17,19 +17,22 @@ const fetchWeatherByLocation = async () => {
     });
 
     const { latitude, longitude } = location.coords;
+    console.log(
+      `latitude: ${latitude}, longitude: ${longitude} and api key: ${process.env.EXPO_PUBLIC_WEATHER_API}`,
+    );
 
-    const url = `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${latitude},${longitude}`;
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${process.env.EXPO_PUBLIC_WEATHER_API}&q=${latitude},${longitude}&days=5`;
 
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log(data);
-
+    console.log("weather forecast data: ", data.forecast);
+    console.log("forecast day data: ", data.forecast.forecastday);
+    return data;
     // Example:
     // setWeather(data);
   } catch (error) {
     console.error("Error fetching weather:", error);
-    setLoading(false);
     alert("Unable to get location");
   }
 };

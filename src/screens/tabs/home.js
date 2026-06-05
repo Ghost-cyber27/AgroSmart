@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -5,41 +6,64 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
+  Modal,
+  TextInput,
 } from "react-native";
 import cropsData from "../../utils/crops.json";
-import { LoadingPlantData } from "../../components/components";
+import {
+  LoadingPlantData,
+  WeatherCard,
+  LoggedIn,
+} from "../../components/components";
 import { COLORS } from "../../utils/colors";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { truncate } from "../../utils/functions";
+import { truncate, fetchWeatherByLocation } from "../../utils/functions";
 import { StatusBar } from "expo-status-bar";
+import cropData from "../../utils/crops.json";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
-  const data = [
-    { id: "1", name: "maize", image: require("../../../assets/plant3.jpg") },
-    {
-      id: "1",
-      name: "maizeoouyf",
-      image: require("../../../assets/plant3.jpg"),
-    },
-    { id: "3", name: "maize", image: require("../../../assets/plant3.jpg") },
-    {
-      id: "4",
-      name: "maizeoouyf",
-      image: require("../../../assets/plant3.jpg"),
-    },
-  ];
+  const [weather, setWeather] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [loadedData, setLoadedData] = useState(false);
+  const [load, setLoad] = useState(true);
+  const navigation = useNavigation();
+
+  const recommendBtn = () => {
+    setVisible(!visible);
+  };
+
+  useEffect(() => {
+    setTimeout(() => setLoad(false), 2000);
+    const gettingWeather = async () => {
+      const result = await fetchWeatherByLocation();
+      setWeather(result);
+    };
+
+    gettingWeather();
+  }, []);
+
+  if (load) {
+    return <LoggedIn />;
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={cropData.crops}
         renderItem={({ item }) => (
-          <TouchableOpacity style={{ margin: wp("3%") }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CropDetails", { item: item })}
+            style={{ margin: wp("3%") }}
+          >
             <ImageBackground
-              source={item.image}
+              source={{ uri: item.image }}
               style={styles.card}
               imageStyle={styles.card}
             >
@@ -67,12 +91,61 @@ export default function Home() {
                   style={styles.weatherCard}
                   imageStyle={styles.weatherCard}
                   blurRadius={5}
-                ></ImageBackground>
+                >
+                  {/*weather ? (
+                    <>
+                      <View style={{ flexDirection: "row", gap: wp("6%") }}>
+                        {weather.forecast.forecastday.map((item, index) => (
+                          <WeatherCard key={index} item={item} />
+                        ))}
+                      </View>
+                      <View>
+                        <Text style={styles.weatherText}>{new Date()}</Text>
+                        <Text style={styles.weatherText}>DEGREE</Text>
+                        <Ionicons
+                          name="cloud"
+                          size={30}
+                          color={COLORS.lightColor}
+                        />
+                      </View>
+                    </>
+                  ) : (
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: wp("90%"),
+                        height: hp("30%"),
+                      }}
+                    >
+                      <ActivityIndicator size={"large"} color={"white"} />
+                    </View>
+                  )*/}
+                </ImageBackground>
               </View>
             </View>
           </>
         }
       />
+      <TouchableOpacity style={styles.floatingBtn} onPress={recommendBtn}>
+        <Ionicons name="add" color={"white"} size={60} />
+      </TouchableOpacity>
+      <Modal visible={visible} animationType="slide">
+        {loadedData ? (
+          <View>
+            <Text></Text>
+          </View>
+        ) : (
+          <View>
+            {/*location*/}
+            <TextInput />
+            {/*soil type*/}
+            <TextInput />
+            {/*season*/}
+            <TextInput />
+          </View>
+        )}
+      </Modal>
       <StatusBar hidden style="light" animated />
     </View>
   );
@@ -141,5 +214,22 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     borderRadius: 10,
     overflow: "hidden",
+    justifyContent: "space-evenly",
+  },
+  weatherText: {
+    color: "white",
+    fontSize: 20,
+    fontFamily: "Black",
+  },
+  floatingBtn: {
+    width: wp("20%"),
+    height: hp("10%"),
+    borderRadius: 50,
+    backgroundColor: COLORS.lightColor,
+    position: "absolute",
+    top: hp("85%"),
+    left: wp("75%"),
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -4,6 +4,7 @@ import Welcome from "../screens/auth/welcome";
 import Login from "../screens/auth/login";
 import Signup from "../screens/auth/signup";
 import ForgotPassword from "../screens/auth/forgotPassword";
+import CropDetails from "../screens/support_screens/cropDetails";
 import { UserTabs } from "./UserTabs";
 
 const AuthStack = createNativeStackNavigator();
@@ -27,6 +28,11 @@ const App = () => {
         name="Main"
         component={UserTabs}
         options={{ headerShown: false }}
+      />
+      <AppStack.Screen
+        name="CropDetails"
+        component={CropDetails}
+        options={{ headerShown: true, headerTitle: "Crop Details" }}
       />
     </AppStack.Navigator>
   );

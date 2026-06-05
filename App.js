@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { RootNavigator } from "./src/navigation/RootNavigator";
+import { AuthProvider } from "./src/services/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,7 +22,11 @@ export default function App() {
 
     loadingFont();
   }, []);
-  return <RootNavigator />;
+  return (
+    <AuthProvider>
+      <RootNavigator />
+    </AuthProvider>
+  );
 }
 
 const styles = StyleSheet.create({

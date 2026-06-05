@@ -25,15 +25,15 @@ export default function Profile() {
         />
       </View>
       <View style={styles.firstCon}>
-        <View style={styles.lower}>
+        <TouchableOpacity style={styles.lower}>
           <Text style={styles.h1}>Profile</Text>
-        </View>
-        <View style={styles.lower}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.lower}>
           <Text style={styles.h1}>Terms and Conditions</Text>
-        </View>
-        <View>
+        </TouchableOpacity>
+        <TouchableOpacity>
           <Text style={[styles.h1, { color: "red" }]}>Log Out</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
