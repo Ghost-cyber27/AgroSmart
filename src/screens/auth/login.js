@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,8 @@ import { COLORS } from "../../utils/colors";
 import { useNavigation } from "@react-navigation/native";
 import { object, string } from "yup";
 import { Formik } from "formik";
+import { AuthContext } from "../../services/AuthContext";
+import { LoadingLogin } from "../../components/components";
 
 const LoginSchemas = object({
   email: string().email("Must be an Email").required("Email is Required"),
@@ -28,6 +30,14 @@ const LoginSchemas = object({
 export default function Login() {
   const navigation = useNavigation();
   const [seePass, setSeePass] = useState(true);
+  const { login, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return(
+      <LoadingLogin/>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Image source={require("../../../assets/login.jpg")} style={styles.img} />

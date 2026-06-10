@@ -7,7 +7,6 @@ export const fetchWeatherByLocation = async () => {
 
     if (status !== "granted") {
       alert("Permission to access location was denied");
-      setLoading(false);
       return;
     }
 
@@ -39,4 +38,8 @@ export const fetchWeatherByLocation = async () => {
 
 export const truncate = (text) => {
   return text.length > 6 ? text.substring(0, 20) + "..." : text;
+};
+
+export const shorten = (text) => {
+  return text.length > 1 ? text.substring(0, 1) + "" : text;
 };

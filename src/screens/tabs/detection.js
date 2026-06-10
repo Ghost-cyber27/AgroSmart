@@ -10,7 +10,6 @@ import { Ionicons } from "@expo/vector-icons";
 export default function Detection() {
   return (
     <View style={styles.container}>
-      <Text>{count}</Text>
       <TouchableOpacity style={styles.imgView}>
         <Ionicons name="cloud-upload" size={200} />
       </TouchableOpacity>

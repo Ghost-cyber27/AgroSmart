@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Welcome from "../screens/auth/welcome";
@@ -6,6 +7,7 @@ import Signup from "../screens/auth/signup";
 import ForgotPassword from "../screens/auth/forgotPassword";
 import CropDetails from "../screens/support_screens/cropDetails";
 import { UserTabs } from "./UserTabs";
+import { AuthContext } from "../services/AuthContext";
 
 const AuthStack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
@@ -39,8 +41,10 @@ const App = () => {
 };
 
 export const RootNavigator = () => {
+  const { user } = useContext(AuthContext);
   return (
     <NavigationContainer>
+      {/*user ? <App/> : <Auth/>*/}
       <App />
     </NavigationContainer>
   );

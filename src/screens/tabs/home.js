@@ -29,10 +29,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
-  const [weather, setWeather] = useState([]);
+  const [weather, setWeather] = useState(null);
   const [visible, setVisible] = useState(false);
   const [loadedData, setLoadedData] = useState(false);
-  const [load, setLoad] = useState(true);
   const navigation = useNavigation();
 
   const recommendBtn = () => {
@@ -40,7 +39,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setTimeout(() => setLoad(false), 2000);
     const gettingWeather = async () => {
       const result = await fetchWeatherByLocation();
       setWeather(result);
@@ -48,10 +46,6 @@ export default function Home() {
 
     gettingWeather();
   }, []);
-
-  if (load) {
-    return <LoggedIn />;
-  }
 
   return (
     <View style={styles.container}>
@@ -92,16 +86,16 @@ export default function Home() {
                   imageStyle={styles.weatherCard}
                   blurRadius={5}
                 >
-                  {/*weather ? (
+                  {weather ? (
                     <>
-                      <View style={{ flexDirection: "row", gap: wp("6%") }}>
-                        {weather.forecast.forecastday.map((item, index) => (
+                      <View style={{ flexDirection: "row", gap: wp("0%") }}>
+                        {weather?.forecast?.forecastday.map((item, index) => (
                           <WeatherCard key={index} item={item} />
                         ))}
                       </View>
-                      <View>
-                        <Text style={styles.weatherText}>{new Date()}</Text>
-                        <Text style={styles.weatherText}>DEGREE</Text>
+                      <View style={{padding: wp('1%')}}>
+                        <Text style={styles.weatherText}>{new Date().toLocaleDateString()}</Text>
+                        <Text style={styles.weatherText}>{weather?.current?.temp_c}°C</Text>
                         <Ionicons
                           name="cloud"
                           size={30}
@@ -120,7 +114,7 @@ export default function Home() {
                     >
                       <ActivityIndicator size={"large"} color={"white"} />
                     </View>
-                  )*/}
+                  )}
                 </ImageBackground>
               </View>
             </View>

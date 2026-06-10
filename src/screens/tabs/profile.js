@@ -1,9 +1,12 @@
+import { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  ActivityIndicator,
+  TextInput
 } from "react-native";
 import { Image } from "expo-image";
 import { COLORS } from "../../utils/colors";
@@ -13,6 +16,7 @@ import {
 } from "react-native-responsive-screen";
 
 export default function Profile() {
+  
   return (
     <ImageBackground
       source={require("../../../assets/plant1.jpg")}
@@ -28,6 +32,7 @@ export default function Profile() {
         <TouchableOpacity style={styles.lower}>
           <Text style={styles.h1}>Profile</Text>
         </TouchableOpacity>
+        
         <TouchableOpacity style={styles.lower}>
           <Text style={styles.h1}>Terms and Conditions</Text>
         </TouchableOpacity>
