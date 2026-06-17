@@ -1,0 +1,375 @@
+
+
+## 1. What will be displayed on the screen?
+
+```jsx
+export default function App() {
+  return (
+    <Text>Hello React Native</Text>
+  );
+}
+```
+
+* A) Nothing
+* B) Hello React Native
+* C) Error
+* D) Undefined
+
+---
+
+## 2. What is wrong with this code?
+
+```jsx
+export default function App() {
+  return (
+    <View>
+      Hello World
+    </View>
+  );
+}
+```
+
+* A) Nothing is wrong
+* B) Text must be wrapped inside a `Text` component
+* C) View cannot contain children
+* D) View is deprecated
+
+---
+
+## 3. What value will be rendered?
+
+```jsx
+export default function App() {
+  const age = 25;
+
+  return (
+    <Text>{age}</Text>
+  );
+}
+```
+
+* A) "25"
+* B) age
+* C) undefined
+* D) Error
+
+---
+
+## 4. What happens when the button is pressed?
+
+```jsx
+const [count, setCount] = useState(0);
+
+<Button
+  title="Increment"
+  onPress={() => setCount(count + 1)}
+/>
+```
+
+* A) count decreases
+* B) count increases by 1
+* C) count resets
+* D) Nothing happens
+
+---
+
+## 5. What will be logged?
+
+```jsx
+useEffect(() => {
+  console.log("Mounted");
+}, []);
+```
+
+* A) Every render
+* B) Every button click
+* C) Once when component mounts
+* D) Never
+
+---
+
+## 6. What is the output?
+
+```jsx
+const [name] = useState("John");
+
+return <Text>{name}</Text>;
+```
+
+* A) John
+* B) name
+* C) undefined
+* D) Error
+
+---
+
+## 7. Identify the issue.
+
+```jsx
+const styles = StyleSheet.create({
+  title: {
+    color: "blue"
+  }
+});
+
+<Text style="title">Hello</Text>
+```
+
+* A) StyleSheet is incorrect
+* B) Should use `style={styles.title}`
+* C) color is invalid
+* D) No issue
+
+---
+
+## 8. What will this render?
+
+```jsx
+<Text>
+  {true ? "Online" : "Offline"}
+</Text>
+```
+
+* A) Online
+* B) Offline
+* C) true
+* D) Error
+
+---
+
+## 9. What is the purpose of the `keyExtractor`?
+
+```jsx
+<FlatList
+  data={users}
+  keyExtractor={(item) => item.id}
+  renderItem={({ item }) => (
+    <Text>{item.name}</Text>
+  )}
+/>
+```
+
+* A) Sort data
+* B) Generate unique keys
+* C) Filter data
+* D) Style list items
+
+---
+
+## 10. What is the output after pressing the button twice?
+
+```jsx
+const [count, setCount] = useState(0);
+
+<Button
+  title="Add"
+  onPress={() => setCount(count + 1)}
+/>
+
+<Text>{count}</Text>
+```
+
+* A) 0
+* B) 1
+* C) 2
+* D) Error
+
+---
+
+## 11. What is wrong with this API call?
+
+```jsx
+useEffect(() => {
+  fetch("https://api.example.com/users")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+}, []);
+```
+
+* A) Missing dependency array
+* B) fetch is invalid in React Native
+* C) Nothing is wrong
+* D) res.json() cannot be used
+
+---
+
+## 12. What will happen?
+
+```jsx
+const [user, setUser] = useState(null);
+
+return (
+  <Text>{user.name}</Text>
+);
+```
+
+* A) Displays empty text
+* B) Displays null
+* C) Runtime error
+* D) Displays undefined
+
+---
+
+## 13. What does this hook return?
+
+```jsx
+const inputRef = useRef(null);
+```
+
+* A) State value
+* B) Function
+* C) Mutable reference object
+* D) Promise
+
+---
+
+## 14. What is the benefit of using `FlatList` instead of `ScrollView`?
+
+```jsx
+<ScrollView>
+  {items.map(item => (
+    <Text key={item.id}>{item.name}</Text>
+  ))}
+</ScrollView>
+```
+
+* A) Better styling
+* B) Better performance for large lists
+* C) Smaller bundle size
+* D) Faster API requests
+
+---
+
+## 15. What will this code display?
+
+```jsx
+const [count, setCount] = useState(5);
+
+return (
+  <Text>{count * 2}</Text>
+);
+```
+
+* A) 5
+* B) 10
+* C) 25
+* D) Error
+
+---
+
+## 16. How many times will this effect run?
+
+```jsx
+const [count, setCount] = useState(0);
+
+useEffect(() => {
+  console.log("Effect");
+}, [count]);
+```
+
+* A) Once only
+* B) Never
+* C) On mount and whenever count changes
+* D) Every second
+
+---
+
+## 17. What optimization does this provide?
+
+```jsx
+const memoizedValue = useMemo(() => {
+  return expensiveCalculation(data);
+}, [data]);
+```
+
+* A) Prevents re-rendering
+* B) Caches expensive calculations
+* C) Handles API requests
+* D) Creates refs
+
+---
+
+## 18. What is the issue?
+
+```jsx
+<FlatList
+  data={users}
+  renderItem={({ item }) => (
+    <Text>{item.name}</Text>
+  )}
+/>
+```
+
+* A) Missing keyExtractor
+* B) renderItem is invalid
+* C) data prop is invalid
+* D) No issue
+
+---
+
+## 19. What will happen when pressing the button?
+
+```jsx
+const [visible, setVisible] = useState(false);
+
+<Button
+  title="Toggle"
+  onPress={() => setVisible(!visible)}
+/>
+
+{visible && <Text>Hello</Text>}
+```
+
+* A) Hello never appears
+* B) Hello toggles on/off
+* C) App crashes
+* D) Nothing changes
+
+---
+
+## 20. What is the output?
+
+```jsx
+const users = [
+  { id: "1", name: "John" },
+  { id: "2", name: "Jane" }
+];
+
+return (
+  <FlatList
+    data={users}
+    renderItem={({ item }) => (
+      <Text>{item.name}</Text>
+    )}
+  />
+);
+```
+
+* A) John Jane
+* B) IDs only
+* C) Error
+* D) Empty screen
+
+---
+
+### Challenge Question
+
+What is the bug in this code and how would you fix it?
+
+```jsx
+const [count, setCount] = useState(0);
+
+const increment = () => {
+  setCount(count + 1);
+  setCount(count + 1);
+};
+
+<Button title="Add" onPress={increment} />
+```
+
+Explain:
+
+1. What value `count` becomes after one click.
+2. Why React behaves this way.
+3. How to correctly increment twice.
+

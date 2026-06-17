@@ -8,10 +8,11 @@ import { COLORS } from "../../utils/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function Detection() {
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.imgView}>
-        <Ionicons name="cloud-upload" size={200} />
+        <Ionicons name="cloud-upload" size={200} color={COLORS.bgColor} />
       </TouchableOpacity>
       <View style={styles.viewing}>
         <TouchableOpacity style={styles.btn}>
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   btn: {
     width: wp("85%"),
     height: hp("7%"),
-    backgroundColor: COLORS.bgColor,
+    backgroundColor: COLORS.lightColor,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
