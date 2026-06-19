@@ -1,0 +1,84 @@
+By default, Expo Application Services (EAS) generates an Android App Bundle (`.aab`) 
+file, which is optimized for Google Play Store uploads but cannot be directly 
+installed on a physical phone.
+
+To generate a shareable, installable `.apk` file instead, 
+you just need to explicitly tell EAS to use the `apk` build type in your 
+configuration.
+
+Here is the step-by-step process:
+
+Step 1: Install and Log In to EAS CLI
+
+If you haven't already, make sure you have the EAS command-line tool installed globally and that you are logged into your Expo account.
+
+=> npm install -g eas-cli
+=> eas login
+
+Step 2: Configure EAS in Your Project
+
+If your project isn't configured for EAS yet, initialize it by running:
+
+=> eas build:configure
+This command creates an `eas.json` file in your root directory.
+
+Step 3: Modify eas.json
+
+Open the generated eas.json file. You need to add `"buildType": "apk"` 
+to one of your build profiles (the `preview` profile is typically used for this).
+
+Modify your file so that it looks like this:
+
+{
+  "cli": {
+    "version": ">= 1.0.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {}
+  }
+}
+
+Step 4: Run the Build Command
+
+Now, trigger the build specifically targeting Android and using your `preview` 
+profile:
+
+=> eas build --platform android --profile preview
+
+> 💡 Tip: If you don't want to use Expo's cloud infrastructure 
+(or wait in the free-tier queue) and you have Android Studio/SDK set up on 
+your machine, you can run the build locally by adding the `--local` flag:
+
+=> eas build --platform android --profile preview --local
+
+
+>  If you want to build for both Android and IOS for production then:
+
+=> eas build --platform all
+
+> For only Android
+
+=> eas build --platform android
+
+> For only IOS
+
+=> eas build --platform ios 
+
+Step 5: Download the APK
+
+Once the build finishes successfully:
+
+1. The terminal will display a direct **download link** to your `.apk` file.
+2. If you built it on the cloud, you can also log into your **Expo Dashboard**, 
+navigate to your project's builds, and download the APK directly to your computer 
+or scan the QR code with your phone to install it.
+

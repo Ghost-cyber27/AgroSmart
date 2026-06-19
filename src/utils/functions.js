@@ -1,7 +1,7 @@
 import * as Location from "expo-location";
 import { db } from "../services/firebaseConfig";
 import { getDocs, collection, updateDoc, deleteDoc, doc } from "firebase/firestore";
-
+import * as ImagePicker from 'expo-image-picker';
 export const fetchWeatherByLocation = async () => {
   try {
     // Request permission
@@ -63,42 +63,45 @@ export const getRecommendations = (cropsData, userPreferences) => {
   .sort((a, b) => b.score - a.score); // Highest scores first
 };
 
+export const getImages = () => {
+  try {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      base64: true,
+      quality: 0.5
+    });
+
+    if (!result) {
+      console.log("Couldn't get the image");
+    }
+
+    console.log("Images: ", result.assets);
+    return result.assets[0];
+  } catch (error) {
+    console.error("Error getting images: ", error);
+  }
+}
 
 // Google Vision
-// import * as ImagePicker from 'expo-image-picker';
-// import * as FileSystem from 'expo-file-system';
-
-// // Replace with your actual Google Cloud API Key
-// const GOOGLE_CLOUD_VISION_API_KEY = "YOUR_RESTRICTED_API_KEY";
-
-// const analyzeCropDirect = async () => {
-//   // 1. Pick Image
-//   let result = await ImagePicker.launchCameraAsync({
-//     base64: true,
-//     quality: 0.5, // Lower quality helps keep the base64 string size manageable
-//   });
-
-//   if (!result.canceled) {
-//     const base64Image = result.assets[0].base64;
-
-//     // 2. Call Google Vision API directly
-//     const apiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_CLOUD_VISION_API_KEY}`;
+const analyzeCropDirect = async (base64) => {
+    // 2. Call Google Vision API directly
+    const apiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${process.env.EXPO_PUBLIC_GOOGLE_CLOUD_API_KEY}`;
     
-//     const response = await fetch(apiUrl, {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         requests: [{
-//           image: { content: base64Image },
-//           features: [{ type: 'LABEL_DETECTION', maxResults: 5 }]
-//         }]
-//       })
-//     });
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requests: [{
+          image: { content: base64 },
+          features: [{ type: 'LABEL_DETECTION', maxResults: 5 }]
+        }]
+      })
+    });
 
-//     const resultData = await response.json();
-//     const labels = resultData.responses[0].labelAnnotations.map(l => l.description);
+    const resultData = await response.json();
+    const labels = resultData.responses[0].labelAnnotations.map(l => l.description);
     
-//     console.log("Detected labels:", labels);
-//     // 3. Match labels against your crops JSON as shown previously
-//   }
-// };
+    console.log("Detected labels:", labels);
+    return labels;
+    // 3. Match labels against your crops JSON as shown previously
+};

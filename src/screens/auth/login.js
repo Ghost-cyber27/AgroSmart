@@ -33,9 +33,7 @@ export default function Login() {
   const { login, loading } = useContext(AuthContext);
 
   if (loading) {
-    return(
-      <LoadingLogin/>
-    );
+    return <LoadingLogin />;
   }
 
   return (
@@ -117,52 +115,6 @@ export default function Login() {
     </View>
   );
 }
-
-/**
- * <View style={styles.content}>
-        <Text style={styles.h1}>Login</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="email@example.com"
-          keyboardType="email-address"
-        />
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.textInput2}
-            placeholder="Your Password"
-            keyboardType="default"
-            secureTextEntry={seePass}
-          />
-          {seePass ? (
-            <Ionicons
-              name="eye-off"
-              size={24}
-              onPress={() => setSeePass(false)}
-            />
-          ) : (
-            <Ionicons name="eye" size={24} onPress={() => setSeePass(true)} />
-          )}
-        </View>
-        <TouchableOpacity
-          style={styles.fBtn}
-          onPress={() => navigation.navigate("ForgotPassword")}
-        >
-          <Text style={styles.fText}>Forgot Password ?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={() => setVisible(true)}>
-          <Text style={styles.btnText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.rBtn}
-          onPress={() => navigation.navigate("Signup")}
-        >
-          <Text style={styles.text}>
-            Don't have an account
-            <Text style={{ fontWeight: "bold" }}>, Register</Text>
-          </Text>
-        </TouchableOpacity>
-      </View>
- */
 
 const styles = StyleSheet.create({
   container: {

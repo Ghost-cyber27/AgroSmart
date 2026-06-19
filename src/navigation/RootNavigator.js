@@ -12,7 +12,17 @@ import { AuthContext } from "../services/AuthContext";
 const AuthStack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
 
-const Auth = () => {
+const Auth = ({ install }) => {
+  if (install) {
+    return (
+      <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+        <AuthStack.Screen name="Login" component={Login} />
+        <AuthStack.Screen name="Signup" component={Signup} />
+        <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
+      </AuthStack.Navigator>
+    );
+  }
+
   return (
     <AuthStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthStack.Screen name="Welcome" component={Welcome} />
@@ -41,11 +51,10 @@ const App = () => {
 };
 
 export const RootNavigator = () => {
-  const { user } = useContext(AuthContext);
+  const { user, install } = useContext(AuthContext);
   return (
     <NavigationContainer>
-      {/*user ? <App/> : <Auth/>*/}
-      <App />
+      {user ? <App /> : <Auth install={install} />}
     </NavigationContainer>
   );
 };

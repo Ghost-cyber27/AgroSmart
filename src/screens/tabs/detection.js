@@ -6,16 +6,52 @@ import {
 } from "react-native-responsive-screen";
 import { COLORS } from "../../utils/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { getImages, analyzeCropDirect } from "../../utils/functions";
 
 export default function Detection() {
-  
+  const [img, setImg] = useState(null);
+  const [base64, setBase64] = useState(null);
+  const [detectResult, setDetectResult] = useState(null);
+
+  const gettingImage = () => {
+    const result = getImages();
+
+    if (!result) {
+      console.log("No Image Selected");
+    }
+
+    setImg(result.uri);
+    setBase64(result.base64);
+    console.log("Image Successfully Selected");
+  };
+
+  const gettingResult = async () => {
+    const result = await analyzeCropDirect(base64);
+
+    if (!result) {
+      console.log("Analysis Failed...");
+    }
+
+    setDetectResult(result);
+    console.log("Analysis Complete!!!");
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.imgView}>
-        <Ionicons name="cloud-upload" size={200} color={COLORS.bgColor} />
+        {img ? (
+          <Image source={{ uri: img }} style={styles.img} />
+        ) : (
+          <Ionicons
+            name="cloud-upload"
+            size={200}
+            color={COLORS.bgColor}
+            onPress={gettingImage}
+          />
+        )}
       </TouchableOpacity>
       <View style={styles.viewing}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={gettingResult}>
           <Text style={styles.btnText}>UPLOAD and DETECT</Text>
         </TouchableOpacity>
       </View>
